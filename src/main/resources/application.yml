@@ -1,3 +1,19 @@
 spring:
   application:
     name: petshop-backend
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    url: 'jdbc:h2:mem:testdb'
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: ${DDL_AUTO:create}
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: '/h2-console'
