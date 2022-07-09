@@ -5,6 +5,7 @@ import br.com.valdircezar.petshop.mapper.UserMapper;
 import br.com.valdircezar.petshop.model.request.UserRequest;
 import br.com.valdircezar.petshop.repository.UserRepository;
 import br.com.valdircezar.petshop.services.UserService;
+import br.com.valdircezar.petshop.services.exception.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,8 @@ public class UserServiceImpl implements UserService {
 
     private User findById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new
+                        ObjectNotFoundException("Object not found! Id: " + id + ", Type: " + User.class.getSimpleName()));
     }
 
     private void validateIfEmailAlreadyExists(UserRequest request) {
