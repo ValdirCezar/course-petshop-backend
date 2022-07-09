@@ -45,4 +45,12 @@ public class Order implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
 }

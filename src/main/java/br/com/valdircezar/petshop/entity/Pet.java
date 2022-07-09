@@ -6,7 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -41,4 +43,8 @@ public class Pet implements Serializable {
     private PortEnum port;
 
     private String description;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "pet")
+    private List<Order> orders = new ArrayList<>();
 }

@@ -6,7 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -45,4 +47,8 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private Set<ProfileEnum> profiles = new HashSet<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 }
