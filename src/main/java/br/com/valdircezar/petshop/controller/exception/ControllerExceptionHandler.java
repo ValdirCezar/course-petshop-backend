@@ -32,5 +32,5 @@ public class ControllerExceptionHandler {
                         requireNonNull(ex.getBindingResult().getFieldError().getDefaultMessage()), request.getRequestURI())
         );
     }
-    
+
 }

@@ -22,6 +22,18 @@ public class UserServiceImpl implements UserService {
         return repository.save(mapper.toEntity(request));
     }
 
+    @Override
+    public User update(Long id, UserRequest request) {
+        var user = findById(id);
+        user = mapper.toEntity(request, user);
+        return repository.save(user);
+    }
+
+    private User findById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
     private void validateIfEmailAlreadyExists(UserRequest request) {
         if(repository.findByEmail(request.getEmail()).isPresent()) {
             throw new DataIntegrityViolationException("E-mail already exists");

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
     User create(UserRequest request);
+
+    User update(Long id, UserRequest request);
 }
