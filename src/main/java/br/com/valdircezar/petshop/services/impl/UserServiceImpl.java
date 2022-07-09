@@ -6,6 +6,7 @@ import br.com.valdircezar.petshop.model.request.UserRequest;
 import br.com.valdircezar.petshop.repository.UserRepository;
 import br.com.valdircezar.petshop.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(UserRequest request) {
+        validateIfEmailAlreadyExists(request);
         return repository.save(mapper.toEntity(request));
     }
+
+    private void validateIfEmailAlreadyExists(UserRequest request) {
+        if(repository.findByEmail(request.getEmail()).isPresent()) {
+            throw new DataIntegrityViolationException("E-mail already exists");
+        }
+    }
+
 }
